@@ -2,6 +2,7 @@
   "name": "app",
   "private": true,
   "scripts": {
+    "build": "vite build",
     "format": "prettier --write \"app/**/*.js\"",
     "format:check": "prettier -c \"app/**/*.js\""
   },

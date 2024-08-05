@@ -1,0 +1,67 @@
+name: Check pull request
+
+on:
+ pull_request:
+   branches: [ main ]
+
+jobs:
+  verify:
+    name: Build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_DB: piggy_test
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install ruby dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Install js dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Setup assets
+        run: bundler exec rails assets:clean assets:precompile
+      - name: Check ruby formatting
+        run: bundler exec rubocop --fail-level=warning
+      - name: Check js formatting
+        run: yarn format:check
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PIGGY_DATABASE_HOST: localhost
+          PIGGY_DATABASE_NAME: piggy_test
+          PIGGY_DATABASE_USER: docker
+          PIGGY_DATABASE_PASSWORD: docker
+          PGHOST: localhost
+          POSTGRES_DB: piggy_test
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+        run: rake db:create db:schema:load
+      - name: Run ruby tests
+        env:
+          IS_CI: true
+          RAILS_ENV: test
+          PIGGY_DATABASE_HOST: localhost
+          PIGGY_DATABASE_NAME: piggy_test
+          PIGGY_DATABASE_USER: docker
+          PIGGY_DATABASE_PASSWORD: docker
+          PGHOST: localhost
+          POSTGRES_DB: piggy_test
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
+        run: rspec
