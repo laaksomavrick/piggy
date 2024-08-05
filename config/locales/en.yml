@@ -34,9 +34,19 @@ en:
     organization:
       fields:
         name:
-          default: "My Household"
+          default: "Household"
   views:
     devise:
+      registrations:
+        new:
+          fields:
+            email: 'Email address'
+            first_name: 'First name'
+            last_name: 'Last name'
+            password: 'Password'
+            password_confirmation: 'Password confirmation'
+          buttons:
+            create: 'Sign up'
       sessions:
         new:
           fields:

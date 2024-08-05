@@ -1,1 +1,15 @@
-<%= @organization.name %>
+<div class="flex flex-col">
+  <div class="text-4xl font-semibold pb-4">
+    <%= @organization.name %>
+  </div>
+
+  <div class="text-2xl font-semibold pb-4">
+    Members
+  </div>
+
+  <ul >
+    <% @members.each do |member| %>
+     <%= render 'organizations/member', member: member %>
+    <% end %>
+  </ul>
+</div>

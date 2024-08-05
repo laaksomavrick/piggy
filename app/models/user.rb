@@ -10,6 +10,11 @@ class User < ApplicationRecord
   after_create :create_default_organization, if: :no_organization?
 
   validate :only_one_organization
+  validates :first_name, :last_name, presence: true
+
+  def membership
+    organization.organization_memberships.where(user_id: id).first
+  end
 
   def organization
     organizations.first
@@ -17,6 +22,10 @@ class User < ApplicationRecord
 
   def organization_membership
     organization_memberships.first
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   private
