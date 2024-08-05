@@ -24,6 +24,9 @@ gem 'cssbundling-rails'
 
 gem 'vite_rails'
 
+# https://github.com/heartcombo/devise
+gem 'devise', '~> 4.9'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

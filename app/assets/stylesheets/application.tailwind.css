@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .text-field {
+        @apply shadow hover:shadow-md w-full mt-2 outline-none rounded-md border-gray-300 placeholder-gray-300 focus:border-brand-500;
+    }
+    .button {
+        @apply bg-brand-500 hover:bg-brand-400 text-white font-bold py-2 px-4 rounded w-full shadow hover:shadow-md;
+    }
+    .danger-alert {
+        @apply my-4 m-auto w-full bg-red-100 border-red-500 border rounded text-red-900 cursor-pointer px-4 py-3 shadow hover:shadow-md;
+    }
+    .info-alert {
+        @apply my-4 m-auto w-full bg-blue-100 border-blue-500 border rounded text-blue-900 cursor-pointer px-4 py-3 shadow hover:shadow-md;
+    }
+
+}
