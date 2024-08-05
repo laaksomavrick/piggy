@@ -58,7 +58,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  host: <%= ENV.fetch("PIGGY_DATABASE_NAME") { "localhost" }%>
+  host: <%= ENV.fetch("PIGGY_DATABASE_HOST") { "localhost" }%>
   database: <%= ENV.fetch("PIGGY_DATABASE_NAME") { "piggy_test" }%>
   username: <%= ENV.fetch("PIGGY_DATABASE_USER") { "docker" }%>
   password: <%= ENV.fetch("PIGGY_DATABASE_PASSWORD") { "docker" }%>

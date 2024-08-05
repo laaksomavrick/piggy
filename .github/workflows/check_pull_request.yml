@@ -13,9 +13,9 @@ jobs:
       postgres:
         image: postgres:11
         env:
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: piggy_test
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
         ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
@@ -41,21 +41,27 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
+          PIGGY_DATABASE_HOST: localhost
+          PIGGY_DATABASE_NAME: piggy_test
+          PIGGY_DATABASE_USER: docker
+          PIGGY_DATABASE_PASSWORD: docker
           PGHOST: localhost
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: piggy_test
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+          PGPORT: ${{ job.services.postgres.ports[5432] }}
         run: rake db:create db:schema:load
       - name: Run ruby tests
         env:
+          IS_CI: true
           RAILS_ENV: test
           PIGGY_DATABASE_HOST: localhost
-          PIGGY_DATABASE_NAME: rails_github_actions_test
-          PIGGY_DATABASE_USER: rails_github_actions
-          PIGGY_DATABASE_PASSWORD: postgres
+          PIGGY_DATABASE_NAME: piggy_test
+          PIGGY_DATABASE_USER: docker
+          PIGGY_DATABASE_PASSWORD: docker
           PGHOST: localhost
-          POSTGRES_DB: rails_github_actions_test
-          POSTGRES_USER: rails_github_actions
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: piggy_test
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
           PGPORT: ${{ job.services.postgres.ports[5432] }}
         run: rspec
