@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
   before_create :create_default_organization, if: :no_organization?
 
+  def organization
+    organizations.first # TODO: validate only one organization per user
+  end
+
   private
 
   def create_default_organization
