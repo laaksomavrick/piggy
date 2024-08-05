@@ -30,6 +30,11 @@
 en:
   app:
     name: 'Piggy'
+  models:
+    organization:
+      fields:
+        name:
+          default: "My Household"
   views:
     devise:
       sessions:

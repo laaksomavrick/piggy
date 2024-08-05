@@ -13,6 +13,10 @@
 
   <body class="h-full bg-slate-50">
     <%= render 'layouts/alerts' %>
-    <%= yield %>
+    <% if current_user %>
+      <%= render 'layouts/app' %>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>
