@@ -5,4 +5,20 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :organization_memberships
+  has_many :organizations, through: :organization_memberships
+
+  before_create :create_default_organization, if: :no_organization?
+
+  private
+
+  def create_default_organization
+    default_organization = Organization.new(name: I18n.t('models.organization.fields.name.default'))
+    organizations << default_organization
+  end
+
+  def no_organization?
+    organizations.empty?
+  end
 end
