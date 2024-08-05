@@ -24,8 +24,8 @@ test:
 
 .PHONY: format
 format:
-	@bundler exec rubocop -A
+	@bundler exec rubocop -A && yarn format
 
 .PHONY: check-format
 check-format:
-	@bundler exec rubocop --fail-level=warning
+	@bundler exec rubocop --fail-level=warning && yarn format:check
