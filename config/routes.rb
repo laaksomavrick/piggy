@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
   resources :organizations, only: [:index], path: 'household'
+  resources :investment_accounts, only: [:index]
 
   # Defines the root path route ("/")
   # root "posts#index"
