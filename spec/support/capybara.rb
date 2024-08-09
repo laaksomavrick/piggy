@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/support/capybara.rb
 
 is_ci = ENV.fetch('IS_CI', false)

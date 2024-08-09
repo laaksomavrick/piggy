@@ -1,13 +1,11 @@
 <div class="flex flex-col">
-  <div class="text-4xl font-semibold pb-4">
-    <%= @organization.name %>
-  </div>
+  <%= render 'layouts/page_header', header: @organization.name %>
 
   <div class="text-2xl font-semibold pb-4">
     Members
   </div>
 
-  <ul >
+  <ul>
     <% @members.each do |member| %>
      <%= render 'organizations/member', member: member %>
     <% end %>

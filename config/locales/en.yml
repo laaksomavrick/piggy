@@ -36,6 +36,17 @@ en:
         name:
           default: "Household"
   views:
+    nav:
+      links:
+        dashboard: 'Dashboard'
+        household: 'Household'
+        investment_accounts: 'Accounts'
+    dashboard:
+      index:
+        header: 'Dashboard'
+    investment_accounts:
+      index:
+        header: 'Investment Accounts'
     devise:
       registrations:
         new:
