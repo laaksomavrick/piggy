@@ -1,14 +1,13 @@
 <%= render 'layouts/page_header', header: t('views.investment_accounts.index.header') %>
 
+<div class="flex pb-4">
+  <%= render 'layouts/page_subheader', subheader: t('views.investment_accounts.index.subheader') %>
+  <%= link_to 'New', new_investment_account_path, class: 'button max-w-24 w-auto max-h-10 ml-auto' %>
+</div>
+
 <ul>
   <% @accounts.each do |account| %>
-    <li class="flex justify-between gap-x-6 pb-4">
-      <div class="flex min-w-0 gap-x-4">
-        <div class="min-w-0 flex-auto">
-          <p class="text-sm font-semibold leading-6 text-gray-900"><%= account.name %></p>
-        </div>
-      </div>
-    </li>
+    <%= render 'account', account: account %>
   <% end %>
 </ul>
 
