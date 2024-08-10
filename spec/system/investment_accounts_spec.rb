@@ -27,4 +27,66 @@ RSpec.describe 'Investment Accounts' do
       end
     end
   end
+
+  describe 'create page' do
+    context 'when user is not authenticated' do
+      it 'redirects to sign-in' do
+        visit new_investment_account_path
+        expect(page).to have_current_path('/users/sign_in')
+      end
+    end
+
+    context 'when user is authenticated' do
+      before do
+        sign_in user
+      end
+
+      it 'can create a new investment account' do
+        visit new_investment_account_path
+
+        fill_in I18n.t('views.investment_accounts.new.fields.name'), with: 'foo'
+        fill_in I18n.t('views.investment_accounts.new.fields.description'), with: 'bar'
+        fill_in I18n.t('views.investment_accounts.new.fields.contribution_limit'), with: '100'
+
+        click_on 'Create Investment account'
+
+        expect(page).to have_content(I18n.t('views.investment_accounts.create.flash.success', name: 'foo'))
+        expect(page).to have_content('foo')
+        expect(page).to have_content('bar')
+        expect(page).to have_content('100')
+      end
+
+      it 'can create a new without optional fields' do
+        visit new_investment_account_path
+
+        fill_in I18n.t('views.investment_accounts.new.fields.name'), with: 'foo'
+
+        click_on 'Create Investment account'
+
+        expect(page).to have_content(I18n.t('views.investment_accounts.create.flash.success', name: 'foo'))
+        expect(page).to have_content('foo')
+      end
+
+      it 'requires name' do
+        visit new_investment_account_path
+
+        fill_in I18n.t('views.investment_accounts.new.fields.description'), with: 'Test Description'
+        fill_in I18n.t('views.investment_accounts.new.fields.contribution_limit'), with: '100'
+
+        click_on 'Create Investment account'
+
+        expect(page).to have_current_path(new_investment_account_path)
+      end
+
+      it 'shows an error when name is empty' do
+        visit new_investment_account_path
+        fill_in 'Name', with: ''
+
+        click_on 'Create Investment account'
+
+        expect(page).not_to have_content(I18n.t('views.investment_accounts.create.flash.success', name: ''))
+        expect(page).to have_current_path(new_investment_account_path)
+      end
+    end
+  end
 end

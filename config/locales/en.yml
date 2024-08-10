@@ -47,6 +47,20 @@ en:
     investment_accounts:
       index:
         header: 'Investment Accounts'
+        subheader: 'Accounts'
+      new:
+        header: 'New Investment Account'
+        fields:
+          name: 'Name'
+          description: 'Description'
+          contribution_limit: 'Contribution limit'
+      create:
+        flash:
+          success: 'Successfully created %{name}'
+          failure: 'Oops! Something went wrong creating %{name}'
+    household:
+      index:
+        subheader: 'Members'
     devise:
       registrations:
         new:
