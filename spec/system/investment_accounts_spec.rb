@@ -89,4 +89,36 @@ RSpec.describe 'Investment Accounts' do
       end
     end
   end
+
+  describe 'show page' do
+    context 'when user is not authenticated' do
+      it 'redirects to sign-in' do
+        investment_account = create(:investment_account)
+        visit investment_account_path(investment_account)
+        expect(page).to have_current_path('/users/sign_in')
+      end
+    end
+
+    context 'when user is authenticated' do
+      let!(:investment_account) { create(:investment_account, organization: user.organization) }
+
+      before do
+        sign_in user
+      end
+
+      it 'can view an investment account' do
+        visit investment_account_path(investment_account)
+        expect(page).to have_content(investment_account.name)
+        expect(page).to have_content(investment_account.description)
+        expect(page).to have_content(investment_account.contribution_limit)
+      end
+
+      it 'can not view another household investment account' do
+        other_investment_account = create(:investment_account)
+        visit investment_account_path(other_investment_account)
+        expect(page).to have_content(I18n.t('views.default.flash.not_authorized'))
+        expect(page).to have_current_path(investment_accounts_path)
+      end
+    end
+  end
 end
