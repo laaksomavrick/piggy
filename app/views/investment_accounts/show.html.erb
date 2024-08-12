@@ -1,6 +1,9 @@
 <div class="grid grid-rows-[60px_1fr] h-full">
 
-      <%= render 'layouts/page_header', header: t('views.investment_accounts.show.header') %>
+  <div class="flex pb-4">
+    <%= render 'layouts/page_header', header: t('views.investment_accounts.show.header') %>
+    <%= link_to 'Edit', edit_investment_account_path(@investment_account), class: 'button max-w-24 w-auto max-h-10 ml-auto' %>
+  </div>
 
   <div class="grid grid-cols-12 gap-4 w-100 h-full">
     <div class="col-span-8 border rounded">

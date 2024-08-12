@@ -20,6 +20,17 @@ class InvestmentAccountsController < ApplicationController
     @investment_account = InvestmentAccount.new
   end
 
+  def edit
+    @investment_account = InvestmentAccount.find(params[:id])
+    authorize @investment_account
+  rescue Pundit::NotAuthorizedError
+    flash[:alert] = t('views.default.flash.not_authorized')
+    redirect_to investment_accounts_path
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = t('views.default.flash.not_found')
+    redirect_to investment_accounts_path
+  end
+
   def create
     @investment_account = InvestmentAccount.new(investment_account_params)
 
@@ -29,6 +40,17 @@ class InvestmentAccountsController < ApplicationController
     else
       flash.now[:alert] = t('views.investment_accounts.create.flash.failure', name: @investment_account.name)
       render :new
+    end
+  end
+
+  def update
+    investment_account_id = params[:id].to_i
+    @investment_account = authorize InvestmentAccount.find_by(id: investment_account_id)
+    if @investment_account.update(investment_account_params)
+      flash[:notice] = t('views.investment_accounts.update.flash.success', name: @investment_account.name)
+      redirect_to @investment_account
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 

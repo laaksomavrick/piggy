@@ -58,10 +58,20 @@ en:
           name: 'Name'
           description: 'Description'
           contribution_limit: 'Contribution limit'
+      edit:
+        header: 'Update Investment Account'
+        fields:
+          name: 'Name'
+          description: 'Description'
+          contribution_limit: 'Contribution limit'
       create:
         flash:
           success: 'Successfully created %{name}'
           failure: 'Oops! Something went wrong creating %{name}'
+      update:
+        flash:
+          success: 'Successfully updated %{name}'
+          failure: 'Oops! Something went wrong updating %{name}'
       show:
         header: 'Investment Account'
         performance:

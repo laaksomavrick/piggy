@@ -1,0 +1,33 @@
+<%= render 'layouts/page_header', header: t('views.investment_accounts.edit.header') %>
+
+<div class="max-w-lg">
+
+  <%= form_with model: @investment_account do |f| %>
+
+    <%= f.hidden_field :organization_id, value: current_user.organization.id %>
+
+    <div class="flex flex-col pb-4">
+      <%= f.label :name, t('views.investment_accounts.new.fields.name'), class: "label text-xl" %>
+      <%= f.text_field :name, class: "text-field text-xl", autofocus: true, required: true %>
+      <%= render 'layouts/forms/input_error', model: @investment_account, field: :name %>
+    </div>
+
+    <div class="flex flex-col pb-4 max-w-lg">
+      <%= f.label :description, t('views.investment_accounts.new.fields.description'), class: "label text-xl" %>
+      <%= f.text_field :description, class: "text-field text-xl", autofocus: true %>
+      <%= render 'layouts/forms/input_error', model: @investment_account, field: :description %>
+    </div>
+
+    <div class="flex flex-col pb-4 max-w-lg">
+      <%= f.label :contribution_limit, t('views.investment_accounts.new.fields.contribution_limit'), class: "label text-xl" %>
+      <%= f.number_field :contribution_limit, class: "text-field text-xl", autofocus: true %>
+      <%= render 'layouts/forms/input_error', model: @investment_account, field: :contribution_limit %>
+    </div>
+
+    <div class="flex mt-4">
+      <%= f.submit nil, class: "button" %>
+    </div>
+
+  <% end %>
+
+</div>

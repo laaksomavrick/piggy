@@ -90,6 +90,38 @@ RSpec.describe 'Investment Accounts' do
     end
   end
 
+  describe 'edit page' do
+    let!(:investment_account) { create(:investment_account, organization: user.organization) }
+
+    context 'when user is not authenticated' do
+      it 'redirects to sign-in' do
+        visit edit_investment_account_path(investment_account)
+        expect(page).to have_current_path('/users/sign_in')
+      end
+    end
+
+    context 'when user is authenticated' do
+      before do
+        sign_in user
+      end
+
+      it 'can update an investment account' do
+        visit edit_investment_account_path(investment_account)
+
+        fill_in I18n.t('views.investment_accounts.new.fields.name'), with: 'foo'
+        fill_in I18n.t('views.investment_accounts.new.fields.description'), with: 'bar'
+        fill_in I18n.t('views.investment_accounts.new.fields.contribution_limit'), with: '100'
+
+        click_on 'Update Investment account'
+
+        expect(page).to have_content(I18n.t('views.investment_accounts.update.flash.success', name: 'foo'))
+        expect(page).to have_content('foo')
+        expect(page).to have_content('bar')
+        expect(page).to have_content('100')
+      end
+    end
+  end
+
   describe 'show page' do
     context 'when user is not authenticated' do
       it 'redirects to sign-in' do
