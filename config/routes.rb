@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
   resources :organizations, only: [:index], path: 'household'
-  resources :investment_accounts, only: %i[index new create show]
+  resources :investment_accounts, only: %i[index new create show edit update]
 
   # Defines the root path route ("/")
   # root "posts#index"

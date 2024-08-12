@@ -28,6 +28,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def admin?
+    membership.role == 'admin'
+  end
+
   private
 
   def only_one_organization
