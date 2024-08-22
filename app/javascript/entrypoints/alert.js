@@ -1,4 +1,4 @@
-(() => {
+const setupAlerts = () => {
   const alerts = document.querySelectorAll('.alert');
   for (const alert of alerts) {
     alert.addEventListener('click', (e) => {
@@ -9,4 +9,6 @@
       }
     });
   }
-})();
+};
+
+document.addEventListener('turbo:load', setupAlerts);

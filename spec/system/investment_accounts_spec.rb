@@ -151,6 +151,18 @@ RSpec.describe 'Investment Accounts' do
         expect(page).to have_content(I18n.t('views.default.flash.not_authorized'))
         expect(page).to have_current_path(investment_accounts_path)
       end
+
+      it 'can delete an investment account' do
+        investment_account_name = investment_account.name
+        visit investment_account_path(investment_account)
+
+        accept_confirm do
+          click_button I18n.t('views.default.actions.delete')
+        end
+
+        expect(page).to have_content(I18n.t('views.investment_accounts.destroy.flash.success',
+                                            name: investment_account_name))
+      end
     end
   end
 end

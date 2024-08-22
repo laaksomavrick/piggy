@@ -9,6 +9,9 @@
     .button {
         @apply bg-brand-600 hover:bg-brand-500 text-white font-semibold py-2 px-4 rounded w-full cursor-pointer;
     }
+    .destroy-button {
+        @apply bg-red-600 hover:bg-red-500 text-white font-semibold py-2 px-4 rounded w-full cursor-pointer;
+    }
     .danger-alert {
         @apply my-4 m-auto w-full bg-red-100 border-red-500 border rounded text-red-900 cursor-pointer px-4 py-3 shadow hover:shadow-md;
     }

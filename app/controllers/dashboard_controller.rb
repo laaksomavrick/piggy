@@ -2,6 +2,6 @@
 
 class DashboardController < ApplicationController
   def index
-    @accounts = current_user.organization.investment_accounts
+    @accounts = current_user.organization.investment_accounts.active
   end
 end

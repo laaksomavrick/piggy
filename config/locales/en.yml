@@ -40,6 +40,9 @@ en:
       flash:
         not_authorized: 'You are forbidden from accessing this resource'
         not_found: 'The requested resource does not exist'
+      actions:
+        edit: 'Edit'
+        delete: 'Delete'
     nav:
       links:
         dashboard: 'Dashboard'
@@ -72,6 +75,10 @@ en:
         flash:
           success: 'Successfully updated %{name}'
           failure: 'Oops! Something went wrong updating %{name}'
+      destroy:
+        flash:
+          success: 'Successfully deleted %{name}'
+          failure: 'Oops! Something went wrong deleting %{name}'
       show:
         header: 'Investment Account'
         performance:
@@ -80,6 +87,8 @@ en:
           subheader: 'Details'
         activity:
           subheader: 'Activity'
+        buttons:
+          confirm_delete: 'Are you sure you want to delete this investment account? Data may no longer be retrievable.'
     household:
       index:
         subheader: 'Members'

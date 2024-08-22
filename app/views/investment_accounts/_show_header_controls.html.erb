@@ -1,3 +1,8 @@
-<div class="px-4 py-6 sm:px-6 lg:px-8">
-  <%= link_to 'Edit', edit_investment_account_path(@investment_account), class: 'button max-w-24 w-auto max-h-10 h-auto ml-auto' %>
+<div class="flex flex-row gap-x-4 px-4 py-6 sm:px-6 lg:px-8">
+  <%= link_to t('views.default.actions.edit'), edit_investment_account_path(@investment_account), class: 'button max-w-24 w-auto max-h-10 h-auto ml-auto' %>
+
+
+  <%= button_to investment_account_path(@investment_account), method: :delete, form: { data: { turbo_confirm: t('views.investment_accounts.show.buttons.confirm_delete') } }, class: 'destroy-button max-w-24 w-auto max-h-10 h-auto ml-auto', 'aria-label': 'Delete' do %>
+    <%= t('views.default.actions.delete') %>
+  <% end %>
 </div>
