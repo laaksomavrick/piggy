@@ -1,11 +1,8 @@
-<div class="flex flex-col">
-  <%= render 'layouts/page_header', header: @organization.name %>
 
-  <%= render 'layouts/page_subheader', subheader: t('views.household.index.subheader') %>
-
+<%= render 'layouts/page_container', header: @organization.name do %>
   <ul>
     <% @members.each do |member| %>
-     <%= render 'organizations/member', member: member %>
+      <%= render 'organizations/member', member: member %>
     <% end %>
   </ul>
-</div>
+<% end %>

@@ -1,13 +1,12 @@
-<%= render 'layouts/page_header', header: t('views.investment_accounts.index.header') %>
+<%= render 'layouts/page_container', header: t('views.investment_accounts.index.header') do %>
+  <div class="flex pb-4">
+    <%= render 'layouts/page_subheader', subheader: t('views.investment_accounts.index.subheader') %>
+    <%= link_to 'New', new_investment_account_path, class: 'button max-w-24 w-auto max-h-10 ml-auto' %>
+  </div>
 
-<div class="flex pb-4">
-  <%= render 'layouts/page_subheader', subheader: t('views.investment_accounts.index.subheader') %>
-  <%= link_to 'New', new_investment_account_path, class: 'button max-w-24 w-auto max-h-10 ml-auto' %>
-</div>
-
-<ul>
-  <% @accounts.each do |account| %>
-    <%= render 'account', account: account %>
-  <% end %>
-</ul>
-
+  <ul>
+    <% @accounts.each do |account| %>
+      <%= render 'account', account: account %>
+    <% end %>
+  </ul>
+<% end %>

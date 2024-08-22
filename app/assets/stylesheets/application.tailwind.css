@@ -7,7 +7,7 @@
         @apply shadow hover:shadow-md w-full mt-2 outline-none rounded-md border-gray-300 placeholder-gray-300 focus:border-brand-500;
     }
     .button {
-        @apply bg-brand-500 hover:bg-brand-400 text-white font-bold py-2 px-4 rounded w-full shadow hover:shadow-md cursor-pointer;
+        @apply bg-brand-600 hover:bg-brand-500 text-white font-semibold py-2 px-4 rounded w-full cursor-pointer;
     }
     .danger-alert {
         @apply my-4 m-auto w-full bg-red-100 border-red-500 border rounded text-red-900 cursor-pointer px-4 py-3 shadow hover:shadow-md;
