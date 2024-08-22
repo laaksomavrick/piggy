@@ -2,7 +2,7 @@
 
 class InvestmentAccountsController < ApplicationController
   def index
-    @accounts = current_user.organization.investment_accounts
+    @accounts = current_user.organization.investment_accounts.active
   end
 
   def show
@@ -52,6 +52,24 @@ class InvestmentAccountsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    investment_account_id = params[:id].to_i
+    @investment_account = authorize InvestmentAccount.find_by(id: investment_account_id)
+
+    @investment_account.is_deleted = true
+    @investment_account.deleted_at = DateTime.now.utc
+    if @investment_account.save
+      flash[:notice] = t('views.investment_accounts.destroy.flash.success', name: @investment_account.name)
+      redirect_to investment_accounts_path
+    else
+      flash[:alert] = t('views.investment_accounts.destroy.flash.failure', name: @investment_account.name)
+      render :show
+    end
+  rescue Pundit::NotAuthorizedError
+    flash[:alert] = t('views.default.flash.not_authorized')
+    redirect_to investment_account_path(@investment_account)
   end
 
   private

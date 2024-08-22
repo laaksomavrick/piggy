@@ -1,5 +1,14 @@
-<header class="bg-white shadow">
-  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold tracking-tight text-brand-900"><%= header %></h1>
+<% header_controls = header_controls || nil %>
+
+<header class="border border-b-1 border-t-0 border-r-0 border-l-0">
+  <div class="flex flex-row items-center">
+    <div class="max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-brand-900"><%= header %></h1>
+    </div>
+    <% if header_controls %>
+      <div class="ml-auto">
+        <%= header_controls %>
+      </div>
+    <% end %>
   </div>
 </header>

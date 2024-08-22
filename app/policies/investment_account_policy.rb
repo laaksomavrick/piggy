@@ -10,4 +10,8 @@ class InvestmentAccountPolicy < ApplicationPolicy
     is_admin = @user.admin?
     belongs_to_org && is_admin
   end
+
+  def destroy?
+    update?
+  end
 end
