@@ -1,3 +1,22 @@
 <%= render 'layouts/page_container', header: t('views.dashboard.index.header') do %>
-  hello, world
+  <div>
+    <span class="whitespace-nowrap rounded-md border border-brand-500 px-2 py-3 text-2xl font-semibold text-brand-700 cursor-pointer">
+      All accounts
+      </span>
+    <% @accounts.each do |account| %>
+      <!-- Solid -->
+
+      <!--    <span class="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-purple-700">-->
+      <!--    Live-->
+      <!--    </span>-->
+
+      <!-- Outlined -->
+
+      <span class="whitespace-nowrap rounded-md border border-brand-500 px-2 py-3 text-2xl font-semibold text-brand-700 cursor-pointer">
+        <%= account.name %>
+      </span>
+
+    <% end %>
+  </div>
+
 <% end %>
