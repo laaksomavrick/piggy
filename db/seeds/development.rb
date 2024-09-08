@@ -18,3 +18,4 @@ member.save
 create(:investment_account, organization: org)
 create(:investment_account, organization: org)
 create(:investment_account, organization: org)
+create(:investment_account, organization: org, is_deleted: true, name: "Should be deleted")
