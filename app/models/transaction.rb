@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Transaction < ApplicationRecord
   belongs_to :investment_account
 
@@ -8,9 +10,4 @@ class Transaction < ApplicationRecord
       'withdrawal'
     end
   end
-
-  def dollars
-    amount / 100
-  end
-
 end

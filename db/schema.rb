@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_134517) do
     t.bigint "organization_id", null: false
     t.string "name", null: false
     t.string "description"
-    t.integer "contribution_limit"
+    t.bigint "contribution_limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_deleted", default: false, null: false

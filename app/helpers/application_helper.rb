@@ -9,4 +9,8 @@ module ApplicationHelper
 
     "#{first_name.first}#{last_name.first}"
   end
+
+  def humanize_money(cents)
+    Money.from_cents(cents)
+  end
 end

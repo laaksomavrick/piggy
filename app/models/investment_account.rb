@@ -7,4 +7,8 @@ class InvestmentAccount < ApplicationRecord
 
   scope :active, -> { where(is_deleted: false) }
   scope :deleted, -> { where(is_deleted: true) }
+
+  def total_contributions
+    transactions.sum(:amount)
+  end
 end

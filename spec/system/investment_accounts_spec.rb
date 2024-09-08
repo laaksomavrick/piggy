@@ -138,6 +138,18 @@ RSpec.describe 'Investment Accounts' do
         sign_in user
       end
 
+      context 'details' do
+        it 'has a contribution limit' do
+          visit investment_account_path(investment_account)
+          expect(page).to have_content("$#{Money.from_cents(investment_account.contribution_limit)}")
+        end
+
+        it 'has contributions' do
+          visit investment_account_path(investment_account)
+          expect(page).to have_content("$#{Money.from_cents(investment_account.total_contributions)}")
+        end
+      end
+
       it 'can view an investment account' do
         visit investment_account_path(investment_account)
         expect(page).to have_content(investment_account.name)
