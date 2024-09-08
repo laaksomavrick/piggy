@@ -110,14 +110,14 @@ RSpec.describe 'Investment Accounts' do
 
         fill_in I18n.t('views.investment_accounts.new.fields.name'), with: 'foo'
         fill_in I18n.t('views.investment_accounts.new.fields.description'), with: 'bar'
-        fill_in I18n.t('views.investment_accounts.new.fields.contribution_limit'), with: '100'
+        fill_in I18n.t('views.investment_accounts.new.fields.contribution_limit'), with: '100000'
 
         click_on 'Update Investment account'
 
         expect(page).to have_content(I18n.t('views.investment_accounts.update.flash.success', name: 'foo'))
         expect(page).to have_content('foo')
         expect(page).to have_content('bar')
-        expect(page).to have_content('100')
+        expect(page).to have_content("$1000.00")
       end
     end
   end
@@ -138,13 +138,6 @@ RSpec.describe 'Investment Accounts' do
         sign_in user
       end
 
-      it 'can view an investment account' do
-        visit investment_account_path(investment_account)
-        expect(page).to have_content(investment_account.name)
-        expect(page).to have_content(investment_account.description)
-        expect(page).to have_content(investment_account.contribution_limit)
-      end
-
       it 'can not view another household investment account' do
         other_investment_account = create(:investment_account)
         visit investment_account_path(other_investment_account)
@@ -162,6 +155,23 @@ RSpec.describe 'Investment Accounts' do
 
         expect(page).to have_content(I18n.t('views.investment_accounts.destroy.flash.success',
                                             name: investment_account_name))
+      end
+
+      context 'details' do
+        it 'has a name and description' do
+          visit investment_account_path(investment_account)
+          expect(page).to have_content(investment_account.name)
+          expect(page).to have_content(investment_account.description)
+        end
+        it 'has a contribution limit' do
+          visit investment_account_path(investment_account)
+          expect(page).to have_content("$#{Money.from_cents(investment_account.contribution_limit)}")
+        end
+
+        it 'has contributions' do
+          visit investment_account_path(investment_account)
+          expect(page).to have_content("$#{Money.from_cents(investment_account.total_contributions)}")
+        end
       end
     end
   end

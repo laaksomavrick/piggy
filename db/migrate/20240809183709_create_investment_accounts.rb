@@ -6,7 +6,7 @@ class CreateInvestmentAccounts < ActiveRecord::Migration[7.1]
       t.belongs_to :organization, null: false, foreign_key: true
       t.string :name, null: false
       t.string :description
-      t.integer :contribution_limit
+      t.bigint :contribution_limit
       t.timestamps
     end
   end
